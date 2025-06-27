@@ -1,0 +1,375 @@
+<!-- HTML 코드 시작 -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dream Escape - 방탈출 카페</title>
+  <style>
+    :root {
+      --primary-color: #111;
+      --accent-color: #e50914;
+      --text-light: #f9f9f9;
+      --card-bg: #1c1c1c;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Pretendard', sans-serif;
+      background-color: var(--primary-color);
+      color: var(--text-light);
+      overflow-x: hidden;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background-color: rgba(17, 17, 17, 0.95);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
+      z-index: 1000;
+    }
+
+    header h1 {
+      font-size: 1.8em;
+      color: var(--accent-color);
+      margin: 0;
+    }
+
+    .nav-links a {
+      margin-left: 25px;
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent-color);
+    }
+
+    .hero {
+      background: url('run.jpg') center/cover no-repeat;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 20px;
+      margin-top: 60px;
+    }
+
+    .hero h2 {
+      font-size: 2.8em;
+      max-width: 800px;
+      margin-bottom: 30px;
+      text-shadow: 3px 3px 12px #000;
+    }
+
+    section {
+      padding: 70px 30px 50px;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+
+    section h2 {
+      font-size: 1.8em;
+      margin-bottom: 30px;
+      border-left: 6px solid var(--accent-color);
+      padding-left: 15px;
+    }
+
+    .theme-card-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      padding: 0;
+      margin: 0;
+    }
+
+    .theme-card {
+      flex: 1 1 calc(25% - 20px);
+      max-width: calc(25% - 20px);
+      background: var(--card-bg);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+      transition: transform 0.3s ease;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .theme-card:hover {
+      transform: translateY(-8px);
+    }
+
+    .theme-card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+
+    .theme-card h3 {
+      margin: 12px 15px 8px;
+      font-size: 1.1em;
+      color: #fff;
+    }
+
+    .theme-card p {
+      margin: 0 15px 15px;
+      font-size: 0.9em;
+      color: #bbb;
+      flex-grow: 1;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 20px;
+      color: #aaa;
+      background-color: #111;
+      font-size: 0.9em;
+    }
+
+    #popup {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.7);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 10000;
+    }
+
+    #popup-content {
+      background: #222;
+      padding: 30px;
+      border-radius: 12px;
+      max-width: 500px;
+      width: 90%;
+      text-align: center;
+      position: relative;
+    }
+
+    #popup h3 {
+      color: #e50914;
+    }
+
+    #popup button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #e50914;
+      border: none;
+      color: #fff;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    #popup-close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 24px;
+      color: white;
+      cursor: pointer;
+    }
+
+    input[type="date"], input[type="time"] {
+      padding: 8px;
+      margin-top: 10px;
+      width: 100%;
+      border-radius: 6px;
+      border: none;
+    }
+
+    @media (max-width: 900px) {
+      .theme-card {
+        flex: 1 1 calc(50% - 20px);
+        max-width: calc(50% - 20px);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .theme-card {
+        flex: 1 1 100%;
+        max-width: 100%;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero h2 {
+        font-size: 1.8em;
+      }
+
+      .hero button {
+        padding: 12px 25px;
+        font-size: 1em;
+      }
+
+      header {
+        flex-direction: column;
+        padding: 15px 20px;
+      }
+
+      .nav-links {
+        margin-top: 10px;
+      }
+
+      .nav-links a {
+        margin: 0 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Dream Escape</h1>
+    <div class="nav-links">
+      <a href="#">로그인</a>
+      <a href="#">회원가입</a>
+    </div>
+  </header>
+
+  <div class="hero">
+    <h2>“여기서 나가는 건 선택이 아니라, 살아남은 자의 특권이야.”</h2>
+  </div>
+
+<section class="theme-section">
+  <h2>🆕추천 테마</h2>
+  <div class="theme-card-list">
+    <div class="theme-card" onclick="openPopup('학교탈출', '학교에서 살아남은 자 단 한 사람 최후의 시간이 다가오고 있다. 그것들을 피해서 학교 밖으로 도망쳐라', '공포 / 스릴러', '80분')">
+      <img src="school.jpg" alt="학교탈출">
+      <h3>학교탈출</h3>
+      <p>공포 / 스릴러 / 80분</p>
+    </div>
+    <div class="theme-card" onclick="openPopup('더 메이즈', '마지막 날!! 죽음의 카운트 다운이 시작되었다. 남은 시간 단 60분 미로 밖에 있는 괴수를 죽이고 이 지옥에서 탈출해라.', '스릴러 / 추리', '60분')">
+      <img src="maze.jpg" alt="더 메이즈">
+      <h3>더 메이즈</h3>
+      <p>스릴러 / 추리 / 60분</p>
+    </div>
+    <div class="theme-card" onclick="openPopup('루시드드림', '꿈인지 현실인지 구별이 안가는 세상 나는 지금 현실에 살고 있나요? 아니면 꿈속에서 살아가고 있나요?.', '스릴러 / 추리', '60분')">
+      <img src="1234.jpg" alt="루시드드림">
+      <h3>루시드드림</h3>
+      <p>스릴러 / 추리 / 60분</p>
+    </div>
+    <div class="theme-card" onclick="openPopup('꽁노리', '이따 병후니랑 지후니랑 꽁을 차기로 차기로 약속을 했다. 그런데 병후니랑 지후니가 누구였지?', '스릴러 / 추리', '60분')">
+      <img src="꽁노리.jpg" alt="꽁노리">
+      <h3>꽁노리(머더파커)</h3>
+      <p>스릴러 / 추리 / 60분</p>
+    </div>
+    </section>
+
+  <section class="theme-section">
+    <h2>📌신규 테마</h2>
+  <div class="theme-card-list">
+    <div class="theme-card" onclick="openPopup('지하철', '지하철을 타고 집으로 가던 도중 지하철의 모든 불이 꺼지고, 내가 가는 방향이 아닌 다른 방향으로 가게 되는 것을 알게 되었지만, 이상한 건 왜 나 혼자만 지하철 안에 있는 거지?', '스릴러 / 공포', '60분')">
+      <img src="subway.jpg" alt="지하철">
+      <h3>지하철</h3>
+      <p>공포 / 스릴러 / 90분</p>
+    </div>
+        <div class="theme-card" onclick="openPopup('종말', '지구 종말이 일어나고 앞으로 지상에서 살 수 있는 시간은 단 1시간 가족들과 남은 시간을 보낼 것인가? 아니면 방공호로 가서 살아남을 것인가? 당신의 선택은?', '스릴러 / 액션', '60분')">
+      <img src="apocalypse.jpg" alt="종말">
+      <h3>종말</h3>
+      <p>스릴러 / 추리 / 60분</p>
+    </div>
+        <div class="theme-card" onclick="openPopup('시간여행자', '시간여행을 하는 중 세계 3차대전이 시작하는 것을 보게 된다. 하지만 전쟁에 중심에 대한민국이 있다. Holy Moly!', '스릴러 / 추리', '60분')">
+      <img src="time.jpg" alt="시간여행자">
+      <h3>시간여행자</h3>
+      <p>스릴러 / 추리 / 80분</p>
+    </div>
+        <div class="theme-card" onclick="openPopup('다크룸', '어두운 공간속 한치 앞도 보이지 않는 그곳에서 운명을 건 게임이 시작된다.', '공포 / 추리', '60분')">
+      <img src="dark.jpg" alt="다크룸">
+      <h3>다크룸</h3>
+      <p>스릴러 / 추리 / 70분</p>
+    </div>
+  </div>
+</section>
+
+  <section class="theme-section">
+    <h2>📅아직 안 한 테마</h2>
+      <div class="theme-card-list">
+    <div class="theme-card" onclick="openPopup('캔디샵', '달콤한 사탕 향이 가득한 캔디샵에서 벌어지는 미스터리한 사건, 당신은 이 행복한 공간의 비밀을 풀 수 있을까요?', '추리 / 행복', '60분')">
+      <img src="candy.jpg" alt="캔디샵">
+      <h3>캔디샵</h3>
+      <p>행복 / 추리 / 50분</p>
+    </div>
+        <div class="theme-card" onclick="openPopup('명탐정', '범인은 가까이에 있다! 머릿속에 모든 퍼즐을 맞춰 진실을 밝혀낼 명탐정은 바로 당신입니다.', '추리 / 논리', '60분')">
+      <img src="detective.jpg" alt="명탐정">
+      <h3>명탐정</h3>
+      <p>논리   / 추리 / 60분</p>
+    </div>
+        <div class="theme-card" onclick="openPopup('유령의 집', '폐가로 남겨진 유령의 집, 한밤중에 그곳에 들어간 당신에게 닥쳐오는 섬뜩한 진실… 살아서 나갈 수 있을까요?', '스릴러 / 공포', '60분')">
+      <img src="ghost.jpg" alt="유령의 집">
+      <h3>유령의 집</h3>
+      <p>스릴러 / 추리 / 90분</p>
+    </div>
+        <div class="theme-card" onclick="openPopup('박물관', '평범한 전시품 속에 숨겨진 단서들을 따라 천 년을 넘어 이어진 역사 속 진실을 추적하라 — 추리력과 관찰력이 없다면 영영 빠져나올 수 없다.', '역사 / 추리', '60분')">
+      <img src="museum.jpg" alt="박물관">
+      <h3>박물관</h3>
+      <p>역사 / 추리 / 70분</p>
+    </div>
+  </div>
+</section>
+
+  <div id="popup">
+    <div id="popup-content">
+      <span id="popup-close" onclick="closePopup()">&times;</span>
+      <h3 id="popup-title"></h3>
+      <p id="popup-desc"></p>
+      <p id="popup-genre"></p>
+      <p id="popup-time"></p>
+
+      <label for="reserve-date">예약 날짜:</label><br>
+      <input type="date" id="reserve-date" /><br><br>
+      <label for="reserve-time">예약 시간:</label><br>
+      <input type="time" id="reserve-time" /><br><br>
+
+      <button onclick="reserveTheme()">예약하기</button>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2025 Dream Escape. All rights reserved.
+  </footer>
+
+  <script>
+    function openPopup(title, desc, genre, time) {
+      document.getElementById('popup-title').textContent = title;
+      document.getElementById('popup-desc').textContent = desc;
+      document.getElementById('popup-genre').textContent = '장르: ' + genre;
+      document.getElementById('popup-time').textContent = '시간: ' + time;
+      document.getElementById('reserve-date').value = '';
+      document.getElementById('reserve-time').value = '';
+      document.getElementById('popup').style.display = 'flex';
+    }
+
+    function closePopup() {
+      document.getElementById('popup').style.display = 'none';
+    }
+
+    function reserveTheme() {
+      const date = document.getElementById('reserve-date').value;
+      const time = document.getElementById('reserve-time').value;
+
+      if (!date || !time) {
+        alert("예약 날짜와 시간을 모두 입력해주세요.");
+        return;
+      }
+
+      alert(`예약이 완료되었습니다!\n\n날짜: ${date}\n시간: ${time}`);
+      closePopup();
+    }
+  </script>
+</body>
+</html>

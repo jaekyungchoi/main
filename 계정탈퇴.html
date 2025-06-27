@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dream Escape - 계정 탈퇴</title>
+  <style>
+    :root {
+      --bg: #111;
+      --text: #f9f9f9;
+      --accent: #e50914;
+      --card-bg: #1c1c1c;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Pretendard', sans-serif;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .withdraw-container {
+      background-color: var(--card-bg);
+      padding: 30px;
+      border-radius: 10px;
+      width: 100%;
+      max-width: 500px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.6);
+    }
+
+    h1 {
+      color: var(--accent);
+      font-size: 1.8em;
+      margin-bottom: 20px;
+    }
+
+    p {
+      line-height: 1.5;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 8px;
+      border-radius: 6px;
+      border: none;
+      background-color: #2a2a2a;
+      color: var(--text);
+    }
+
+    .btn-group {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+
+    button {
+      padding: 12px 20px;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .cancel-btn {
+      background-color: #444;
+      color: var(--text);
+    }
+
+    .withdraw-btn {
+      background-color: var(--accent);
+      color: #fff;
+      font-weight: bold;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="withdraw-container">
+    <h1>계정 탈퇴</h1>
+    <p>
+      계정을 탈퇴하면 모든 예약 정보, 후기, 쿠폰 등의 데이터가 삭제되며 복구가 불가능합니다.<br>
+      정말로 탈퇴하시겠습니까?
+    </p>
+
+    <form id="withdrawForm">
+      <label for="password">비밀번호 확인</label>
+      <input type="password" id="password" name="password" required />
+
+      <label for="reason">탈퇴 사유 (선택)</label>
+      <select id="reason" name="reason">
+        <option value="">선택 안 함</option>
+        <option value="not_useful">원하는 테마 부족</option>
+        <option value="expensive">요금이 비쌈</option>
+        <option value="cheap">요금이 싸서</option>
+        <option value="friend">아쎄이가 이용해서</option>
+        <option value="service">불친절한 서비스</option>
+        <option value="other">기타</option>
+      </select>
+
+      <label for="comments">추가 의견 (선택)</label>
+      <textarea id="comments" name="comments" rows="4" placeholder="의견을 남겨주세요..."></textarea>
+
+      <div class="btn-group">
+        <button type="button" class="cancel-btn" onclick="history.back()">취소</button>
+        <button type="submit" class="withdraw-btn">탈퇴하기</button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById('withdrawForm');
+    form.addEventListener('submit', function (e) {
+      e.preventDefault(); 
+
+    
+
+      alert("탈퇴가 완료되었습니다. 메인 화면으로 이동합니다.");
+      window.location.href = "main.html"; 
+    });
+  </script>
+</body>
+</html>

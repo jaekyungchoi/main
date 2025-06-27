@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dream Escape 관리자 대시보드</title>
+  <style>
+    body {
+      background: #111;
+      color: #f9f9f9;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding: 80px 30px 30px;
+      margin: 0;
+    }
+
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: #1c1c1c;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.7);
+      z-index: 100;
+    }
+
+    header h1 {
+      color: #e50914;
+      margin: 0;
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    header .admin-info {
+      color: #bbb;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    header button.logout-btn {
+      background: #e50914;
+      border: none;
+      color: #fff;
+      padding: 8px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    header button.logout-btn:hover {
+      background: #b4070d;
+    }
+
+    section {
+      background: #1c1c1c;
+      padding: 25px;
+      margin-bottom: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.7);
+    }
+
+    section h2 {
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: #e50914;
+      margin-bottom: 15px;
+      border-bottom: 2px solid #e50914;
+      padding-bottom: 6px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 12px 15px;
+      border: 1px solid #444;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    tbody tr:nth-child(odd) {
+      background: #222;
+    }
+
+    tbody tr:hover {
+      background: #333;
+    }
+
+    button.delete-btn {
+      background: #e50914;
+      color: white;
+      border: none;
+      padding: 7px 12px;
+      cursor: pointer;
+      border-radius: 6px;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
+    }
+
+    button.delete-btn:hover {
+      background: #b4070d;
+    }
+
+    button.theme-name-btn {
+      background: none;
+      border: none;
+      color: #63a4ff;
+      text-decoration: underline;
+      cursor: pointer;
+      font-size: 1rem;
+      padding: 0;
+      width: 100%;
+      text-align: left;
+    }
+
+    .theme-desc {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      background-color: #222;
+      margin-top: 5px;
+      padding: 0 10px;
+      border-radius: 5px;
+      color: #ddd;
+      white-space: pre-line;
+    }
+
+    .theme-desc.open {
+      padding: 10px;
+      max-height: 200px;
+    }
+
+    /* 알림 메시지 */
+    #alert-message {
+      position: fixed;
+      top: 60px;
+      right: 30px;
+      padding: 12px 20px;
+      background: #e50914;
+      color: #fff;
+      border-radius: 8px;
+      font-weight: 600;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.7);
+      display: none;
+      z-index: 999;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 80px 15px 15px;
+      }
+      section {
+        padding: 15px;
+      }
+      th, td {
+        padding: 8px 10px;
+      }
+    }
+
+    /* 테마 추가 폼 스타일 */
+    form#add-theme-form {
+      margin-top: 25px;
+    }
+
+    form#add-theme-form input[type="text"],
+    form#add-theme-form textarea,
+    form#add-theme-form button {
+      width: 100%;
+      margin-top: 10px;
+      padding: 10px;
+      border-radius: 6px;
+      border: none;
+      background-color: #2a2a2a;
+      color: white;
+      font-size: 1rem;
+    }
+
+    form#add-theme-form button {
+      background-color: #e50914;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    form#add-theme-form button:hover {
+      background-color: #b4070d;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Dream Escape 관리자</h1>
+  <div class="admin-info">
+    관리자님 환영합니다.
+    <button class="logout-btn" onclick="location.href='관리자 로그인.html'">로그아웃</button>
+  </div>
+</header>
+
+<div id="alert-message"></div>
+
+<section>
+  <h2>테마 관리</h2>
+
+  <h3>등록된 테마</h3>
+  <table>
+    <thead>
+      <tr><th>이름</th><th>설명</th><th>삭제</th></tr>
+    </thead>
+    <tbody id="theme-list">
+      <tr data-theme-name="학교탈출">
+        <td>
+          <button type="button" class="theme-name-btn">학교탈출</button>
+          <div class="theme-desc">폐교에서 벌어지는 스릴 넘치는 공포 테마</div>
+        </td>
+        <td></td>
+        <td><button class="delete-btn">삭제</button></td>
+      </tr>
+      <tr data-theme-name="더 메이즈">
+        <td>
+          <button type="button" class="theme-name-btn">더 메이즈</button>
+          <div class="theme-desc">끝없이 이어지는 미로에서 단서를 찾아 탈출</div>
+        </td>
+        <td></td>
+        <td><button class="delete-btn">삭제</button></td>
+      </tr>
+      <tr data-theme-name="루시드드림">
+        <td>
+          <button type="button" class="theme-name-btn">루시드드림</button>
+          <div class="theme-desc">꿈과 현실을 넘나드는 환상적인 미스터리</div>
+        </td>
+        <td></td>
+        <td><button class="delete-btn">삭제</button></td>
+      </tr>
+      <tr data-theme-name="꽁노리">
+        <td>
+          <button type="button" class="theme-name-btn">꽁노리</button>
+          <div class="theme-desc">의문의 초대장, 무서운 동요, 숨막히는 밤</div>
+        </td>
+        <td></td>
+        <td><button class="delete-btn">삭제</button></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <form id="add-theme-form" method="post" action="/admin/add_theme">
+    <input type="text" name="theme_name" placeholder="새 테마 이름" required>
+    <textarea name="description" placeholder="테마 설명" required></textarea>
+    <button type="submit">테마 추가</button>
+  </form>
+</section>
+
+<section>
+  <h2>예약 목록</h2>
+  <table>
+    <thead><tr><th>이름</th><th>테마</th><th>일시</th><th>인원</th></tr></thead>
+    <tbody>
+      <tr><td>이상훈</td><td>학교탈출</td><td>2025-06-25 13:00</td><td>4명</td></tr>
+      <tr><td>주세희</td><td>더 메이즈</td><td>2025-06-25 14:30</td><td>4명</td></tr>
+      <tr><td>정인식</td><td>루시드드림</td><td>2025-06-25 14:40</td><td>1명</td></tr>
+      <tr><td>김준상</td><td>꽁노리</td><td>2025-06-25 16:00</td><td>3명</td></tr>
+      <tr><td>이강민</td><td>지하철</td><td>2025-06-26 17:00</td><td>2명</td></tr>
+      <tr><td>김영건</td><td>종말</td><td>2025-06-26 15:00</td><td>5명</td></tr>
+      <tr><td>정세아</td><td>시간여행자</td><td>2025-06-26 19:00</td><td>3명</td></tr>
+      <tr><td>김가현</td><td>다크룸</td><td>2025-06-27 13:00</td><td>2명</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<script>
+  function showAlert(msg, duration = 3000) {
+    const alertDiv = document.getElementById('alert-message');
+    alertDiv.textContent = msg;
+    alertDiv.style.display = 'block';
+    setTimeout(() => { alertDiv.style.display = 'none'; }, duration);
+  }
+
+  document.body.addEventListener('click', e => {
+    if(e.target.classList.contains('theme-name-btn')){
+      const desc = e.target.nextElementSibling;
+      document.querySelectorAll('.theme-desc.open').forEach(d => {
+        if(d !== desc) d.classList.remove('open');
+      });
+      desc.classList.toggle('open');
+    }
+
+    if(e.target.classList.contains('delete-btn')){
+      if(!confirm('정말 삭제하시겠습니까?')) return;
+      const tr = e.target.closest('tr');
+      const themeName = tr.dataset.themeName;
+
+      fetch('/admin/delete_theme', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({theme_name: themeName})
+      })
+      .then(res => {
+        if(res.ok){
+          tr.remove();
+          showAlert('삭제 성공');
+        } else {
+          showAlert('삭제 실패');
+        }
+      })
+      .catch(() => showAlert('오류 발생'));
+    }
+  });
+</script>
+</body>
+</html>

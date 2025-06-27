@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>Dream Escape - 회원가입 & 로그인</title>
+  <style>
+    body {
+      background-color: #111;
+      color: #f9f9f9;
+      font-family: 'Pretendard', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background: #1c1c1c;
+      padding: 40px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 420px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.6);
+    }
+
+    h2 {
+      text-align: center;
+      color: #e50914;
+      margin-bottom: 20px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border: none;
+      border-radius: 5px;
+      background-color: #333;
+      color: white;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #e50914;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #c40811;
+    }
+
+    .toggle {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .toggle a {
+      color: #ccc;
+      cursor: pointer;
+      text-decoration: underline;
+      font-size: 0.9em;
+    }
+
+    .error {
+      font-size: 0.8em;
+      color: #ff6b6b;
+      margin-bottom: 10px;
+      display: none;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .terms {
+      font-size: 0.85em;
+      margin-bottom: 10px;
+    }
+
+    .terms label {
+      display: flex;
+      gap: 6px;
+      align-items: flex-start;
+      line-height: 1.4;
+    }
+
+    .terms a {
+      color: #f9f9f9;
+      text-decoration: underline;
+    }
+
+    #loginSuccess button {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <div id="signupForm">
+    <h2>회원가입</h2>
+    <form onsubmit="return validateSignup()">
+      <input id="signup-username" type="text" placeholder="아이디" required>
+      <input id="signup-nickname" type="text" placeholder="닉네임" required>
+      <input id="signup-email" type="email" placeholder="이메일" required>
+      <input id="signup-password" type="password" placeholder="비밀번호" required>
+      <input id="signup-confirm" type="password" placeholder="비밀번호 확인" required>
+
+      <div class="terms">
+        <label>
+          <input type="checkbox" id="terms-agree">
+          <span>
+            <a href="#" target="_blank">이용약관</a> 및
+            <a href="#" target="_blank">개인정보 처리방침</a>에 동의합니다.
+          </span>
+        </label>
+      </div>
+
+      <div class="error" id="signup-error">비밀번호가 일치하지 않거나, 약관 동의가 필요합니다.</div>
+      <button type="submit">회원가입</button>
+    </form>
+    <div class="toggle">
+      이미 계정이 있으신가요? <a onclick="toggleForms()">로그인</a>
+    </div>
+  </div>
+
+  <div id="loginForm" class="hidden">
+    <h2>로그인</h2>
+    <input id="login-username" type="text" placeholder="아이디" required>
+    <input id="login-password" type="password" placeholder="비밀번호" required>
+    <button onclick="handleLogin()">로그인</button>
+    <div class="toggle">
+      계정이 없으신가요? <a onclick="toggleForms()">회원가입</a>
+    </div>
+  </div>
+
+  <div id="loginSuccess" class="hidden">
+    <h2 id="successMessage"></h2>
+    <button onclick="goToMain()">메인화면으로</button>
+  </div>
+
+</div>
+
+<script>
+  function toggleForms() {
+    document.getElementById('signupForm').classList.toggle('hidden');
+    document.getElementById('loginForm').classList.toggle('hidden');
+    document.getElementById('loginSuccess').classList.add('hidden');
+  }
+
+  function validateSignup() {
+    const pw = document.getElementById('signup-password').value;
+    const confirm = document.getElementById('signup-confirm').value;
+    const agree = document.getElementById('terms-agree').checked;
+    const error = document.getElementById('signup-error');
+
+    if (pw !== confirm) {
+      error.textContent = '비밀번호가 일치하지 않습니다.';
+      error.style.display = 'block';
+      return false;
+    }
+
+    if (!agree) {
+      error.textContent = '이용약관에 동의해 주세요.';
+      error.style.display = 'block';
+      return false;
+    }
+
+    error.style.display = 'none';
+    const nickname = document.getElementById('signup-nickname').value;
+    localStorage.setItem('nickname', nickname);
+
+    alert('회원가입이 완료되었습니다! 로그인 화면으로 이동합니다.');
+    toggleForms(); 
+    return false;
+  }
+
+  function handleLogin() {
+    const nickname = localStorage.getItem('nickname') || '사용자';
+
+    document.getElementById('loginForm').classList.add('hidden');
+    document.getElementById('loginSuccess').classList.remove('hidden');
+    document.getElementById('successMessage').textContent = `${nickname}님, 로그인이 완료되었습니다.`;
+  }
+
+  function goToMain() {
+    window.location.href = 'index.html'; 
+  }
+</script>
+</body>
+</html>

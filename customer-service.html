@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dream Escape - 고객센터</title>
+  <style>
+   :root {
+  --bg: #111;
+  --text: #f9f9f9;
+  --accent: #fff;
+  --card-bg: #1c1c1c;
+  --highlight: #ffd54f;
+}
+
+body {
+  margin: 0;
+  font-family: 'Pretendard', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 60px;
+  background: rgba(17,17,17,0.95);
+  display: flex; align-items: center;
+  padding: 0 20px;
+  color: var(--accent);
+  font-size: 1.6em; font-weight: bold;
+  z-index: 1001;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.7);
+}
+
+main {
+  margin-top: 60px; 
+  padding: 20px;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  flex-grow: 1; 
+  overflow-y: visible;
+}
+
+h1, h2 {
+  color: var(--accent);
+  margin-bottom: 15px;
+}
+
+section {
+  background: var(--card-bg);
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 30px;
+}
+
+p {
+  margin: 8px 0;
+  line-height: 1.5;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.faq-question {
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  padding: 12px 10px;
+  font-weight: bold;
+  font-size: 1.05em;
+  color: var(--highlight);
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.faq-question:hover {
+  background: rgba(229,9,20,0.3);
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+  padding: 0 10px;
+  color: #ddd;
+}
+
+.faq-answer.open {
+  max-height: 500px;
+  padding: 10px;
+}
+
+.inquiry-types {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: space-between;
+}
+
+.inquiry-type {
+  flex: 1 1 45%;
+  background: #2a2a2a;
+  border-radius: 8px;
+  padding: 15px 20px;
+  color: var(--accent);
+}
+
+@media (max-width: 600px) {
+  .inquiry-type {
+    flex: 1 1 100%;
+  }
+}
+
+  </style>
+</head>
+<body>
+
+  <header>Dream Escape - 고객센터</header>
+
+  <main>
+    <h1>고객센터 안내</h1>
+
+    <section class="contact-info">
+      <h2>연락처</h2>
+      <p>전화: <a href="tel:0212345678">02-1234-5678</a></p>
+      <p>이메일: <a href="mailto:support@dreamescape.com">support@dreamescape.com</a></p>
+      <p>운영시간: 평일 10:00 ~ 18:00 (주말 및 공휴일 휴무)</p>
+      <p>카카오톡 상담: @dreamescape_support</p>
+      <p>팩스: XX-XXXX-XXXX</p>
+    </section>
+
+    <section>
+      <h2>문의 유형별 안내</h2>
+      <div class="inquiry-types">
+        <div class="inquiry-type">
+          <h3>예약 문의</h3>
+          <p>예약 변경, 취소, 확인 관련 문의</p>
+        </div>
+        <div class="inquiry-type">
+          <h3>결제 및 환불</h3>
+          <p>결제 오류, 환불 절차 및 정책 문의</p>
+        </div>
+        <div class="inquiry-type">
+          <h3>이용 안내</h3>
+          <p>이용 시간, 준비물, 연령 제한 등 정보 제공</p>
+        </div>
+        <div class="inquiry-type">
+          <h3>기술 지원</h3>
+          <p>웹사이트 이용 문제 지원</p>
+        </div>
+        <div class="inquiry-type">
+          <h3>기타 문의</h3>
+          <p>기타 궁금한 점 및 건의사항 접수</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq">
+      <h2>자주 묻는 질문 (FAQ)</h2>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false" aria-controls="answer1" id="question1">
+          예약 취소는 어떻게 진행해야 하나요?
+        </button>
+        <div class="faq-answer" id="answer1" role="region" aria-labelledby="question1">
+          <p>예약 확인 페이지에서 취소 버튼을 눌러 예약을 취소할 수 있습니다. 취소 수수료 정책은 예약 시 안내되는 내용을 참고해 주세요.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false" aria-controls="answer2" id="question2">
+          예약은 어떻게 진행을 하면 되나요?
+        </button>
+        <div class="faq-answer" id="answer2" role="region" aria-labelledby="question2">
+          <p>‘테마 예약’ 메뉴에서 원하는 테마와 날짜를 선택하여 예약하세요.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false" aria-controls="answer3" id="question3">
+          아이들 또는 연령 제한이 있나요?
+        </button>
+        <div class="faq-answer" id="answer3" role="region" aria-labelledby="question3">
+          <p>대부분 테마는 연령 제한이 있으니 예약 시 꼭 확인해 주세요. 보호자 동반이 필요한 경우도 있습니다.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false" aria-controls="answer4" id="question4">
+          결제 수단에는 어떤 것들이 있나요?
+        </button>
+        <div class="faq-answer" id="answer4" role="region" aria-labelledby="question4">
+          <p>신용카드, 체크카드, 계좌이체, 모바일 페이 등을 지원합니다.</p>
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+<script>
+  document.querySelectorAll('.faq-question').forEach(button => {
+    button.onclick = () => {
+      document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('open'));
+      const target = document.getElementById(button.getAttribute('aria-controls'));
+      target.classList.add('open');
+    };
+  });
+</script>
+
+</body>
+</html>

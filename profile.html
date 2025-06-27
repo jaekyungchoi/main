@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>프로필 설정</title>
+  <style>
+    body {
+      font-family: 'Pretendard', sans-serif;
+      background-color: #111;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 50px;
+    }
+
+    h1 {
+      color: #e50914;
+      margin-bottom: 30px;
+    }
+
+    .profile-preview {
+      width: 300px;
+      height: 180px;
+      background-color: #333;
+      background-size: cover;
+      background-position: center;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      border: 2px solid #e50914;
+    }
+
+    .background-options {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 30px;
+    }
+
+    .background-options img {
+      width: 80px;
+      height: 50px;
+      object-fit: cover;
+      border-radius: 8px;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: transform 0.2s, border 0.2s;
+    }
+
+    .background-options img:hover {
+      transform: scale(1.05);
+      border: 2px solid #e50914;
+    }
+
+    .nickname-section {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .nickname-section input {
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      width: 250px;
+      font-size: 1em;
+      margin-bottom: 10px;
+    }
+
+    .nickname-section button {
+      padding: 10px 20px;
+      background-color: #e50914;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-size: 1em;
+      cursor: pointer;
+    }
+
+    .message {
+      margin-top: 20px;
+      color: #0f0;
+      font-weight: bold;
+    }
+
+    .main-btn {
+      margin-top: 30px;
+      padding: 10px 20px;
+      background-color: #444;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .main-btn:hover {
+      background-color: #666;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>프로필 설정</h1>
+  <div id="preview" class="profile-preview"></div>
+  <div class="background-options">
+    <img src="bg1.jpg" alt="배경1" onclick="setBackground('bg1.jpg')" />
+    <img src="bg2.jpg" alt="배경2" onclick="setBackground('bg2.jpg')" />
+    <img src="bg3.jpg" alt="배경3" onclick="setBackground('bg3.jpg')" />
+    <img src="bg4.jpg" alt="배경4" onclick="setBackground('bg4.jpg')" />
+    <img src="bg5.jpg" alt="배경5" onclick="setBackground('bg5.jpg')" />
+    <img src="bg6.jpg" alt="배경6" onclick="setBackground('bg6.jpg')" />
+    <img src="bg7.jpg" alt="배경7" onclick="setBackground('bg7.jpg')" />
+    <img src="bg8.jpg" alt="배경8" onclick="setBackground('bg8.jpg')" />
+  </div>
+
+  <div class="nickname-section">
+    <input type="text" id="nickname" placeholder="닉네임 입력" />
+    <br />
+    <button onclick="confirmNickname()">닉네임 설정</button>
+  </div>
+
+  <div id="message" class="message"></div>
+
+  <a href="main.html" class="main-btn" id="goMain" style="display: none;">메인 화면으로 가기</a>
+
+  <script>
+    function setBackground(img) {
+      document.getElementById('preview').style.backgroundImage = `url('${img}')`;
+    }
+
+    function confirmNickname() {
+      const nickname = document.getElementById('nickname').value.trim();
+
+      if (!nickname) {
+        alert('닉네임을 입력해주세요.');
+        return;
+      }
+
+      const confirmResult = confirm(`닉네임을 "${nickname}"(으)로 설정하시겠습니까?`);
+
+      if (confirmResult) {
+        document.getElementById('message').textContent = `"${nickname}" 닉네임 설정이 완료되었습니다.`;
+        document.getElementById('goMain').style.display = 'inline-block';
+      }
+    }
+  </script>
+
+</body>
+</html>

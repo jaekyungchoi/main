@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dream Escape - 관리자</title>
+  <style>
+    body {
+      background: #111;
+      color: #f9f9f9;
+      font-family: sans-serif;
+      padding: 20px;
+    }
+    header {
+      font-size: 2em;
+      color: #e50914;
+      margin-bottom: 20px;
+    }
+    nav button {
+      background: #333;
+      color: white;
+      border: none;
+      margin-right: 10px;
+      padding: 10px;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    .admin-section {
+      display: none;
+      margin-top: 20px;
+      background: #1c1c1c;
+      padding: 20px;
+      border-radius: 10px;
+    }
+    .admin-section.active {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <header>Dream Escape 관리자 창</header>
+
+  <nav>
+    <button onclick="showSection('members')">회원 관리</button>
+    <button onclick="showSection('reservations')">예약 관리</button>
+    <button onclick="showSection('themes')">테마 관리</button>
+  </nav>
+
+  <section id="members" class="admin-section active">
+    <h2>회원 관리</h2>
+    <p>회원 목록, 탈퇴, 검색 등을 여기에 구현합니다.</p>
+  </section>
+
+  <section id="reservations" class="admin-section">
+    <h2>예약 관리</h2>
+    <p>전체 예약 확인, 취소, 필터링 기능 등을 구현합니다.</p>
+  </section>
+
+  <section id="themes" class="admin-section">
+    <h2>테마 관리</h2>
+    <p>테마 추가, 수정, 삭제 등의 기능이 들어갑니다.</p>
+  </section>
+
+  <script>
+    function showSection(id) {
+      document.querySelectorAll('.admin-section').forEach(sec => sec.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+  </script>
+</body>
+</html>

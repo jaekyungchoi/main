@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dream Escape</title>
+  <style>
+    :root {
+      --bg: #111;
+      --text: #f9f9f9;
+      --accent: #e50914;
+      --card-bg: #1c1c1c;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Pretendard', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 60px;
+      background-color: rgba(17, 17, 17, 0.95);
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      z-index: 1001;
+    }
+
+    .menu-toggle {
+      font-size: 24px;
+      color: var(--text);
+      cursor: pointer;
+      margin-right: 15px;
+      background: none;
+      border: none;
+      z-index: 1002;
+    }
+
+    header h1 {
+      font-size: 1.6em;
+      color: var(--accent);
+      margin: 0;
+    }
+
+    .side-menu {
+      position: fixed;
+      top: 0;
+      left: -260px;
+      width: 260px;
+      height: 100%;
+      background-color: #1a1a1a;
+      padding: 70px 20px 20px;
+      transition: left 0.3s ease;
+      z-index: 1000;
+    }
+
+    .side-menu.active {
+      left: 0;
+    }
+
+    .side-menu a {
+      display: block;
+      padding: 15px 10px;
+      margin-bottom: 10px;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 1.1em;
+      border-radius: 5px;
+      transition: background 0.2s;
+    }
+
+    .side-menu a:hover {
+      background-color: var(--accent);
+    }
+
+    .hero {
+      height: 100vh;
+      background: url('run.jpg') center/cover no-repeat;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    .hero h2 {
+      font-size: 2.5em;
+      max-width: 700px;
+      text-shadow: 2px 2px 8px #000;
+    }
+
+    .reservation-section {
+      padding: 60px 20px;
+      text-align: center;
+      background-color: var(--bg);
+    }
+
+    .theme-box {
+      background-color: var(--card-bg);
+      padding: 30px;
+      border-radius: 10px;
+      display: inline-block;
+      margin: 20px;
+      min-width: 280px;
+      vertical-align: top;
+      max-width: 300px;
+    }
+
+    .theme-img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin: 10px 5px;
+      font-size: 1em;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .check-btn {
+      background-color: #00c853;
+      color: white;
+    }
+
+    .cancel-btn {
+      background-color: #e53935;
+      color: white;
+    }
+
+    @media (max-width: 768px) {
+      .hero h2 {
+        font-size: 1.8em;
+      }
+
+      .side-menu {
+        width: 200px;
+      }
+
+      .theme-box {
+        max-width: 90%;
+        margin: 15px auto;
+        display: block;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <button class="menu-toggle" onclick="toggleMenu()" id="menuToggle">☰</button>
+    <h1>Dream Escape</h1>
+  </header>
+
+  <div class="side-menu" id="sideMenu">
+    <a href="main.html">🏠 메인홈</a>
+    <a href="reservation">📅 테마 예약</a>
+    <a href="지점안내.html">📍 지점 안내</a>
+    <a href="game-explanation.html">🧠 게임 설명</a>
+    <a href="viewport.html">📸 후기 / 갤러리</a>
+    <a href="customer-service.html">📞 고객센터</a>
+  </div>
+
+  <div class="hero">
+    <h2>“여기서 나가는 건 선택이 아니라, 살아남은 자의 특권이야.”</h2>
+  </div>
+
+  <section id="reservation" class="reservation-section">
+    <h2>📅 예약한 테마 목록</h2>
+
+    <div class="theme-box" id="theme1">
+      <img src="school.jpg" alt="학교탈출" class="theme-img" />
+      <p><strong>🎀 테마:</strong> 학교탈출</p>
+      <button class="check-btn" onclick="alert('확인되었습니다.')">확인</button>
+      <button class="cancel-btn" onclick="cancelReservation('theme1')">취소</button>
+    </div>
+
+    <div class="theme-box" id="theme2">
+      <img src="maze.jpg" alt="더 메이즈" class="theme-img" />
+      <p><strong>💀 테마:</strong> 더 메이즈</p>
+      <button class="check-btn" onclick="alert('확인되었습니다.')">확인</button>
+      <button class="cancel-btn" onclick="cancelReservation('theme2')">취소</button>
+    </div>
+
+    <div class="theme-box" id="theme3">
+      <img src="꽁노리.jpg" alt="꽁노리" class="theme-img" />
+      <p><strong>📚 테마:</strong> 꽁노리</p>
+      <button class="check-btn" onclick="alert('확인되었습니다.')">확인</button>
+      <button class="cancel-btn" onclick="cancelReservation('theme3')">취소</button>
+    </div>
+  </section>
+
+  <script>
+    function toggleMenu() {
+      const menu = document.getElementById('sideMenu');
+      const toggleBtn = document.getElementById('menuToggle');
+      menu.classList.toggle('active');
+      toggleBtn.textContent = menu.classList.contains('active') ? '✖' : '☰';
+    }
+
+    function cancelReservation(themeId) {
+      const isConfirmed = confirm("정말 예약을 취소하시겠습니까?");
+      if (isConfirmed) {
+        document.getElementById(themeId).innerHTML = "<p>✅ 예약이 취소되었습니다.</p>";
+      }
+    }
+  </script>
+</body>
+</html>

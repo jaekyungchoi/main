@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dream Escape - 지점 안내</title>
+  <style>
+    :root {
+      --bg: #111;
+      --text: #fff;
+      --accent: #e50914;
+      --card: #1c1c1c;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Pretendard', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    header {
+      background-color: rgba(17, 17, 17, 0.95);
+      height: 60px;
+      display: flex;
+      align-items: center;
+      padding: 0 20px;
+      font-size: 1.5em;
+      font-weight: bold;
+      color: var(--accent);
+    }
+
+    main {
+      display: flex;
+      flex: 1;
+    }
+
+    .sidebar {
+      width: 300px;
+      background-color: var(--card);
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    .region-button {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 8px;
+      background-color: #333;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      text-align: left;
+      font-size: 1em;
+    }
+
+    .region-button:hover {
+      background-color: var(--accent);
+    }
+
+    .city-list {
+      margin-top: 10px;
+      margin-bottom: 20px;
+      padding-left: 10px;
+    }
+
+    .city-item {
+      font-size: 0.95em;
+      margin: 4px 0;
+      color: #ccc;
+    }
+
+    .map-area {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #222;
+    }
+
+.map-area img {
+  max-width: 100%;
+  height: 90%;
+  object-fit: contain;
+}
+
+    @media (max-width: 768px) {
+      main {
+        flex-direction: column;
+      }
+      .sidebar {
+        width: 100%;
+        height: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    Dream Escape - 지점 안내
+  </header>
+
+  <main>
+    <div class="sidebar">
+      <button class="region-button" onclick="showCities('서울')">서울</button>
+      <button class="region-button" onclick="showCities('부산')">부산</button>
+      <button class="region-button" onclick="showCities('대구')">대구</button>
+      <button class="region-button" onclick="showCities('광주')">광주</button>
+      <button class="region-button" onclick="showCities('대전')">대전</button>
+      <button class="region-button" onclick="showCities('울산')">울산</button>
+      <button class="region-button" onclick="showCities('인천')">인천</button>
+      <div id="cityList" class="city-list"></div>
+    </div>
+
+<div class="map-area">
+  <img src="지도.jpg" alt="대한민국 지도 이미지" />
+</div>
+
+  <script>
+    const cities = {
+      "서울": ["강남", "홍대", "건대", "신촌", "중구", "마포", "용산"],
+      "부산": ["해운대", "서면", "광안리", "수영", "기장", "중구"],
+      "대구": ["수성구", "동성로", "달서구", "중구"],
+      "광주": ["동구", "서구", "남구", "북구", "광산구"],
+      "대전": ["둔산", "중구", "유성구", "서구", "동구"],
+      "울산": ["중구", "남구", "동구", "북구", "울주군"],
+      "인천": ["부평구", "연수구", "계양구", "남동구", "중구", "서구"]
+    };
+
+    function showCities(region) {
+      const cityList = document.getElementById('cityList');
+      cityList.innerHTML = `<strong>${region} 지점</strong><br>`;
+      cities[region].forEach(city => {
+        cityList.innerHTML += `<div class="city-item">• ${city}</div>`;
+      });
+    }
+  </script>
+</body>
+</html>
